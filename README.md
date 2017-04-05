@@ -13,7 +13,7 @@ import os
 
 LOGIN_HANDLER = 'sandstone_jupyterhub_login.handlers.JupyterHubLoginHandler'
 
-URL_PREFIX = os.environ.get('SANDSTONE_PREFIX')
+URL_PREFIX = os.environ.get('SANDSTONE_PREFIX', '')
 ```
 
 JupyterHub can now invoke Sandstone IDE by running
