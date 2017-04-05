@@ -4,6 +4,10 @@ import os
 
 class JupyterHubLoginHandler(BaseHandler):
     def get(self):
+        # The XSRF token must be manually set in the absence of
+        # a web form. Accessing the property is enough to set it.
+        self.xsrf_token
+        
         api_token = os.environ['JUPYTERHUB_API_TOKEN']
 
         url = '{protocol}://{host}/hub/api/authorizations/token/{token}'.format(
