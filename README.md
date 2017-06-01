@@ -1,4 +1,6 @@
 # sandstone-jupyterhub-login
+[![DOI](https://zenodo.org/badge/87221406.svg)](https://zenodo.org/badge/latestdoi/87221406)
+
 Use JupyterHub as a multi-user spawner for Sandstone IDE
 
 ## Installation
