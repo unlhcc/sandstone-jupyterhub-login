@@ -1,5 +1,6 @@
 import argparse
 import os
+import re
 import sandstone
 
 
@@ -19,6 +20,8 @@ def run_server():
 
     # Set hub api url environment variable to be read by the login handler
     os.environ['JUPYTERHUB_API_URL'] = args.hub_api_url[1:-1]
+    # Add the $WORK variable to the env so we can see it under volumes
+    os.environ['WORK'] = re.sub('^\/home','/work',os.environ['HOME'])
 
     # Remove extraneous quotes from string
     prefix = args.base_url[1:-1]
