@@ -74,10 +74,30 @@ class JupyterHubLoginHandler(BaseHandler):
 
 class JupyterHubLogoutHandler(BaseHandler):
     def get(self):
+
+        api_token = os.environ['JUPYTERHUB_API_TOKEN']
+        hub_api_url = os.environ['JUPYTERHUB_API_URL']
+
         # clear the user cookie
         self.clear_cookie('user')
         self.clear_cookie('_xsrf')
 
-        # redirect to hub home
+        # redirect to hub logout
         self.set_status(302)
-        self.redirect('/hub/home')
+        self.redirect('/hub/logout'.format())
+
+        # stop the user's server
+        url = '{hub_url}/users/{username}/server'.format(
+            hub_url=hub_api_url,
+            username=self.get_current_user()
+        )
+        verify = getattr(settings,'VERIFY_JH_CERT',True)
+
+        res = requests.delete(
+            url,
+            headers={
+                'Authorization': 'token %s' % api_token
+            },
+            verify=verify,
+            timeout=0.001,
+        )
