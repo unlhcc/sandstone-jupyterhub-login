@@ -22,5 +22,6 @@ def run_server():
 
     # Remove extraneous quotes from string
     prefix = args.base_url[1:-1]
+    cookie_name = args.cookie_name[1:-1]
 
-    sandstone.app.main(port=args.port,prefix=prefix)
+    sandstone.app.main(port=args.port,prefix=prefix,cookie_name=cookie_name)
