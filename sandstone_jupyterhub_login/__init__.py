@@ -17,11 +17,11 @@ def run_server():
     parser.add_argument('--user')
     args = parser.parse_args()
 
-    # Set hub api url environment variable to be read by the login handler
+    # Set hub environment variables to be read by the login handler
     os.environ['JUPYTERHUB_API_URL'] = args.hub_api_url[1:-1]
+    os.environ['JUPYTERHUB_COOKIE_NAME'] = args.cookie_name[1:-1]
 
     # Remove extraneous quotes from string
     prefix = args.base_url[1:-1]
-    cookie_name = args.cookie_name[1:-1]
 
-    sandstone.app.main(port=args.port,prefix=prefix,cookie_name=cookie_name)
+    sandstone.app.main(port=args.port,prefix=prefix)
