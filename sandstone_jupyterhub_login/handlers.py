@@ -15,7 +15,6 @@ class JupyterHubLoginHandler(BaseHandler):
 
         url = '{hub_url}/authorizations/cookie/{cookie_name}/{cookie_value}'.format(
             hub_url=hub_api_url,
-            token=api_token,
             cookie_name=cookie_name,
             cookie_value=encrypted_cookie,
         )
@@ -49,11 +48,11 @@ class JupyterHubLoginHandler(BaseHandler):
 
         api_token = os.environ['JUPYTERHUB_API_TOKEN']
         hub_api_url = os.environ['JUPYTERHUB_API_URL']
+        cookie_name = os.environ['JUPYTERHUB_COOKIE_NAME']
 
         # Has user deconfigured certificate verification?
         verify = getattr(settings,'VERIFY_JH_CERT',True)
 
-        cookie_name = self.settings['cookie_name']
         encrypted_cookie = self.get_cookie(cookie_name)
 
         if encrypted_cookie:
